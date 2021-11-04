@@ -1,6 +1,8 @@
 import {useState} from "react";
 import {Link} from 'react-router-dom';
 
+import "./Home.css";
+
 const Home = () => {
 	const [roomName, setRoomName] = useState("");
 
@@ -8,17 +10,14 @@ const Home = () => {
 		setRoomName(e.target.value);
 	}
 	return(
-		<div>
-				<div class="mb-3">
-					<label className="form-label">Room name</label>
-					<input 
-						type="text" 
-						className="form-control"
-						value={roomName}
-						onChange={handleChange}
-						/>  
-				</div>	
-				<Link to={`/${roomName}`}> Join Room </Link>
+		<div className="home-container">
+			<input 
+				type="text" 
+				className="text-input-field"
+				value={roomName}
+				onChange={handleChange}
+			/>  
+			<Link  className="enter-room-button" to={`/${roomName}`}> Join Room </Link>
   		</div>
 	)
 }
