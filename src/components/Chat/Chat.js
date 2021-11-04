@@ -2,6 +2,8 @@ import { useState } from "react";
 import useChat from "../../Hooks/useChat";
 import useTyping from "../../Hooks/useTyping";
 import Avatar from "../Avatar/Avatar";
+import ChatMessage from "../ChatMessage/ChatMessage";
+import Users from "../Users/Users";
 
 const Chat = (props) => {
 	
@@ -27,38 +29,20 @@ const Chat = (props) => {
 
 
 	return(
-		<div className="">
-			<h1>Room name: ${roomId}</h1>
-			{/* todo: component for user avatar */}
-			<p>{user.name}</p>
-			<Avatar/>
-			{/* todo: component for user avatar */}
-			<div>
-				{
-					users.map(user => 
-						<p>{user.name}</p>
-					)
-				}
+		<div className="chat-room-container">
+			<div className="chat-room-top-bar">
+				<h1 className="room-name">Room: {roomId}</h1>
+				{user && <Avatar user={user}></Avatar>}
 			</div>
-			
-			{/* component with messages */}
-			<div>
-				<ul>
-				{messages.map((message, i) => (
-					<li key={i}><span>{message}</span></li>
-				))}
-
-				{
-					typingUsers.map((user,i) => 
-					<li key={i}><span>{user}</span></li>
-					)	
-				}	
-				</ul>
-			</div>
-			<div>
-				<form>
-					<input type="text"/>
-				</form>
+			<Users users={users}/>
+			<div className="messages-container">
+			<ol className="messages-list">
+          {messages.map((message, i) => (
+            <li key={i}>
+              <ChatMessage message={message}></ChatMessage>
+            </li>
+          ))}
+		  </ol>
 			</div>
 		</div>
 	)
